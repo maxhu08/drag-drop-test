@@ -86,6 +86,3 @@ export const makeDraggable = (
   dropzone.addEventListener("drop", onDrop);
   dropzone.addEventListener("dragend", onDragEnd);
 };
-
-// Usage
-makeDraggable("dropzone", "item-draggable", "drag-btn");
