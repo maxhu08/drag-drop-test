@@ -1,6 +1,6 @@
-# simple-parcel-template
+# drag-drop-test
 
-simple template that uses parcel and has hot module reloading, typescript, and tailwind setup
+drag and drop template
 
 ## getting started
 
@@ -8,11 +8,8 @@ run these commands:
 
 ```shell
 # clone
-git clone https://github.com/maxhu08/simple-parcel-template.git
-cd simple-parcel-template
-
-# remove git info
-rm -rf .git
+git clone https://github.com/maxhu08/drag-drop-test.git
+cd drag-drop-test
 
 # install dependencies
 bun i
