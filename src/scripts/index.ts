@@ -1,17 +1,39 @@
 const dropzone = document.getElementById("dropzone") as HTMLElement;
 let draggedItem: HTMLElement | null = null;
+let dragEnabled = false;
+
+// handle mouse down on button to enable dragging
+document.querySelectorAll(".drag-btn").forEach((button) => {
+  button.addEventListener("mousedown", (e: Event) => {
+    const item = (e.target as HTMLElement).closest(".item-draggable") as HTMLElement;
+    if (item) {
+      draggedItem = item;
+      dragEnabled = true;
+      item.style.transform = "scale(1.025)"; // Slightly enlarge the item while dragging
+      item.setAttribute("draggable", "true"); // Enable dragging
+    }
+  });
+});
+
+// handle mouse up to disable dragging
+document.addEventListener("mouseup", () => {
+  if (draggedItem) {
+    draggedItem.setAttribute("draggable", "false"); // Disable dragging
+    draggedItem.style.transform = ""; // Reset scale after drag ends
+  }
+  dragEnabled = false;
+  draggedItem = null;
+});
 
 // handle drag start
 dropzone.addEventListener("dragstart", (e: DragEvent) => {
-  const target = e.target as HTMLElement;
-  if (target.classList.contains("item-draggable")) {
-    draggedItem = target;
+  if (dragEnabled && draggedItem) {
+    const target = e.target as HTMLElement;
     draggedItem.style.transform = "scale(1.025)"; // Slightly enlarge the item while dragging
 
     // Set the drag image to a transparent image to hide the dragged item
     const dragImage = document.getElementById("drag-image") as HTMLImageElement;
     e.dataTransfer?.setDragImage(dragImage, 0, 0); // Using the transparent image as the drag image
-
     e.dataTransfer?.setData("text/plain", ""); // optional: use this to store data
   }
 });
