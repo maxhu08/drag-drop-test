@@ -52,6 +52,9 @@ dropzone.addEventListener("dragover", (e: DragEvent) => {
     } else {
       dropzone.insertBefore(draggedItem!, hoveredItem.nextSibling);
     }
+  } else if (!hoveredItem.nextSibling && hoveredItem.classList.contains("item-draggable")) {
+    // if we are at the end, append the dragged item to the dropzone
+    dropzone.appendChild(draggedItem!);
   }
 });
 
